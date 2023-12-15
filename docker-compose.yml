@@ -10,6 +10,7 @@ services:
       - db
     environment:
       - DATABASE_URL=mysql://artirate:supersecretpassword@localhost:3306/artirate
+    command: "python manage.py runserver 0:6666"
 
   db:
     image: mysql:8.2.0

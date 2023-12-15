@@ -1,0 +1,28 @@
+version: "3.4"
+services:
+  web:
+    build:
+      context: deploy
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=mysql://artirate:supersecretpassword@localhost:3306/artirate
+
+  db:
+    image: mysql:8.2.0
+    environment:
+      - MYSQL_PASSWORD=supersecretpassword
+      - MYSQL_USER=artirate
+      - MYSQL_DATABASE= artirate
+      - MYSQL_ROOT_PASSWORD= myrootpassword
+
+    volumes:
+      - artirate-db:/var/lib/mysql
+    ports:
+      - "127.0.0.1:5432:5432"
+
+volumes:
+  artirate-db:
